@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchLogin } from '../async/user';
+import { fetchLogin } from '../asyncAction/user';
 import Form from '../components/Form';
+import { useCookies } from 'react-cookie';
 
 const Auth = () => {
   const dispatch = useDispatch();
   let [code, setCode] = useState();
   const { isAuth } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [, setCookie] = useCookies();
   const login = (e) => {
     e.preventDefault();
-    dispatch(fetchLogin(code));
+    dispatch(
+      fetchLogin(code, (token) => {
+        setCookie('token', token);
+      })
+    );
   };
 
   useEffect(() => {
@@ -20,7 +26,7 @@ const Auth = () => {
 
   return (
     <div>
-      <h2>Вхід</h2>
+      <h2 className='center mt-1'>Вхід</h2>
       <Form event={(e) => login(e)}>
         <input
           type='text'

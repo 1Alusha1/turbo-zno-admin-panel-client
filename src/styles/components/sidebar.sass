@@ -1,0 +1,53 @@
+.sidebar
+    background: #222831
+    color: #dedfe4
+    height: 100%
+    &-logo
+        background: #161a1f
+        box-shadow: 0 0 15px #161a1f
+        margin-bottom: 5px
+        padding: 7px
+
+    .option
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        height: 95%
+        &-list
+            a
+                color: #dedfe4
+                text-decoration: none
+                cursor: pointer
+                li
+                    padding: 7px
+                    text-transform: uppercase
+                    margin: 5 0px
+                    transition: 0.3s
+                    &:hover
+                        color: #F2A365
+                        transition: 0.3s
+                &.active
+                    color: #F2A365
+    .controller
+        display: flex
+        flex-direction: column
+        padding: 7px
+        background: #161a1f
+        .logout
+            margin-bottom: 5px
+            color: #dedfe4
+            text-decoration: none
+            transition: 0.3s
+            &:hover
+                color: #F2A365
+                transition: 0.3s
+                cursor: pointer
+
+        .personal-info
+            display: flex
+            align-items: center
+            img
+                margin-right: 15px
+                width: 32px
+                height: 32px
+                filter: invert(1)

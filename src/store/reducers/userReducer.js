@@ -1,16 +1,14 @@
 const FETCH_LOGIN = 'FETCH_LOGIN';
 const FETCH_LOGIN_ERROR = 'FETCH_LOGIN_ERROR';
-
+const CHECK_AUTH_SUCCESS = 'CHECK_AUTH_SUCCESS';
+const CHECK_AUTH_ERROR = 'CHECK_AUTH_ERROR';
 export const initialState = {
   token: '',
   userInfo: {
     _id: '',
     username: '',
   },
-  error: {
-    message: '',
-    type: '',
-  },
+  error: null,
   isAuth: false,
 };
 
@@ -23,12 +21,30 @@ export const userReducer = (state = initialState, action) => {
         userInfo: action.payload.userInfo,
         isAuth: true,
       };
+    case CHECK_AUTH_SUCCESS:
+      return {
+        ...state,
+        userInfo: action.payload.userInfo,
+        isAuth: action.payload.isAuth,
+      };
+    case CHECK_AUTH_ERROR:
+      return { ...state, error: action.payload.error };
     case FETCH_LOGIN_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload, isAuth: false };
     default:
       return state;
   }
 };
+
+export const fetchChekAuthError = (payload) => ({
+  type: CHECK_AUTH_ERROR,
+  payload,
+});
+
+export const fetchChekAuthSuccess = (payload) => ({
+  type: CHECK_AUTH_SUCCESS,
+  payload,
+});
 
 export const fetchLoginActionCreator = (payload) => ({
   type: FETCH_LOGIN,
