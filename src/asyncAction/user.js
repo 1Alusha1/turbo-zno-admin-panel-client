@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config/config';
 import {
   fetchChekAuthError,
   fetchChekAuthSuccess,
@@ -9,7 +10,7 @@ import {
 export const fetchLogin = (code, cb) => {
   return async (dispatch) => {
     await axios
-      .post('http://localhost:3000/auth/login', {
+      .post(`${config.API_URI}/auth/login`, {
         code: code,
       })
       .then(({ data }) => {
@@ -28,7 +29,7 @@ export const fetchChekAuth = (token) => {
     try {
       await axios({
         method: 'GET',
-        url: 'http://localhost:3000/auth/check-auth',
+        url: `${config.API_URI}/auth/check-auth`,
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(({ data }) => {
