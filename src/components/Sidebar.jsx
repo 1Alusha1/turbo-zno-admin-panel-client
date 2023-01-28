@@ -14,13 +14,13 @@ const Sidebar = () => {
             <li>Створити викладача групи </li>
           </NavLink>
           <NavLink
-            to='/create-teacher-sub-group'
+            to='/panel/create-teacher-sub-group'
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             <li>Створити викладача під групи</li>
           </NavLink>
           <NavLink
-            to='/group-list'
+            to='/panel/group-list'
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             <li>Список груп</li>

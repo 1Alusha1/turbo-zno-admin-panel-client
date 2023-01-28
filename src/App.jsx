@@ -3,6 +3,7 @@ import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import Auth from './pages/Auth';
 import CreateTeacherGroup from './pages/CreateTeacherGroup';
+import CreateTeacherSubGroup from './pages/CreateTeacherSubGroup';
 
 function App() {
   return (
@@ -13,9 +14,12 @@ function App() {
         </Route>
         <Route path='/panel' element={<MainLayout />}>
           <Route
-            index
             path='/panel/create-teacher-group'
             element={<CreateTeacherGroup />}
+          ></Route>
+          <Route
+            path='/panel/create-teacher-sub-group'
+            element={<CreateTeacherSubGroup />}
           ></Route>
         </Route>
         <Route path='*' element={<Navigate to='/panel' />} />
