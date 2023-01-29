@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import Auth from './pages/Auth';
 import CreateTeacherGroup from './pages/CreateTeacherGroup';
 import CreateTeacherSubGroup from './pages/CreateTeacherSubGroup';
+import GroupList from './pages/GroupList';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             path='/panel/create-teacher-sub-group'
             element={<CreateTeacherSubGroup />}
           ></Route>
+          <Route path='/panel/group-list' element={<GroupList />}></Route>
         </Route>
         <Route path='*' element={<Navigate to='/panel' />} />
       </Routes>

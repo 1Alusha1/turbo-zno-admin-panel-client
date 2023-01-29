@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchCreateTeacher } from '../async/option';
+import { fetchCreateTeacher } from '../asyncAction/option';
 import Form from '../components/Form';
 
 const CreateTeacherGroup = () => {
