@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/config.js';
+import { setAlert } from '../store/reducers/userAlertReducer.js';
 import {
   fetchChekAuthError,
   fetchChekAuthSuccess,
@@ -18,8 +19,7 @@ export const fetchLogin = (code, cb) => {
         cb(data.token);
       })
       .catch((err) => {
-        console.log(err.response.data);
-        dispatch(fetchLoginErrorActionCreator(err.response.data));
+        dispatch(setAlert(err.response.data));
       });
   };
 };
@@ -36,7 +36,7 @@ export const fetchChekAuth = (token) => {
           dispatch(fetchChekAuthSuccess(data));
         })
         .catch((err) => {
-          dispatch(fetchChekAuthError(err.response.data));
+          dispatch(setAlert(err.response.data));
         });
     } catch (err) {
       if (err) console.log(err);

@@ -1,0 +1,18 @@
+.user-alert
+    position: absolute
+    right: -100%
+    bottom: 0
+    background: #dedfe4
+    color: #30475E
+    width: 500px
+    margin: 0 auto
+    padding: 15px
+    cursor: pointer
+    transition: 0.3s
+    &-error
+        border-left: 2px solid red
+    &-success
+        border-left: 2px solid green
+.user-alert.active
+    right: 0%
+    transition: 0.3s

@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { fetchLogin } from '../asyncAction/user';
 import Form from '../components/Form';
 import { useCookies } from 'react-cookie';
+import UserAlert from '../components/ui/UserAlert';
 
 const Auth = () => {
   const dispatch = useDispatch();
   let [code, setCode] = useState();
   const { isAuth } = useSelector((state) => state.user);
+  const alert = useSelector((state) => state.alert);
   const navigate = useNavigate();
   const [, setCookie] = useCookies();
   const login = (e) => {
@@ -26,6 +28,7 @@ const Auth = () => {
 
   return (
     <div>
+      <UserAlert type={alert.type} message={alert.message} />
       <h2 className='center mt-1'>Вхід</h2>
       <Form event={(e) => login(e)}>
         <input
