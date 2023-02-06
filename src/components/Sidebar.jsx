@@ -1,7 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import config from '../config/config';
+import { removeCookie } from 'react-cookie';
 
 const Sidebar = () => {
-  const logout = () => {};
+  const logout = () => {
+    removeCookie('token', { domain: config.DOMAIN });
+  };
   return (
     <aside className='sidebar'>
       <div className='sidebar-logo'>TurboZNO</div>

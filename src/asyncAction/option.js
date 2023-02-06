@@ -8,8 +8,14 @@ export const fetchCreateTeacher = (userData) => {
     await axios({
       method: 'post',
       url: `${config.API_URI}/option/create-teacher-group`,
-      headers: { 'content-type': 'application/json' },
-      data: JSON.stringify(userData),
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${userData.token}`,
+      },
+      data: JSON.stringify({
+        groupName: userData.groupName,
+        teacherName: userData.teacherName,
+      }),
     })
       .then(({ data }) => {
         dispatch(setAlert(data));
@@ -26,8 +32,15 @@ export const fetchCreateTeacherSubGroup = (userData) => {
     await axios({
       method: 'post',
       url: `${config.API_URI}/option/create-teacher-sub-group`,
-      headers: { 'content-type': 'application/json' },
-      data: JSON.stringify(userData),
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${userData.token}`,
+      },
+      data: JSON.stringify({
+        groupName: userData.groupName,
+        teacherName: userData.teacherName,
+        subGroupName: userData.subGroupName,
+      }),
     })
       .then(({ data }) => {
         dispatch(setAlert(data));
@@ -38,15 +51,16 @@ export const fetchCreateTeacherSubGroup = (userData) => {
   };
 };
 
-export const fetchGetGroups = (teacherName) => {
+export const fetchGetGroups = (userData) => {
   return async (dispatch) => {
     try {
       await axios(`${config.API_URI}/option/get-groups`, {
         method: 'post',
-        data: JSON.stringify({ teacherName: teacherName }),
         headers: {
           'content-type': 'application/json',
+          Authorization: `Bearer ${userData.token}`,
         },
+        data: JSON.stringify({ teacherName: userData.teacherName }),
       })
         .then(({ data }) => {
           dispatch(getGroupsActionCreator(data.list));

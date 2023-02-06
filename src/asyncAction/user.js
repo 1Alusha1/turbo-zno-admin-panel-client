@@ -2,10 +2,8 @@ import axios from 'axios';
 import config from '../config/config.js';
 import { setAlert } from '../store/reducers/userAlertReducer.js';
 import {
-  fetchChekAuthError,
   fetchChekAuthSuccess,
   fetchLoginActionCreator,
-  fetchLoginErrorActionCreator,
 } from '../store/reducers/userReducer';
 
 export const fetchLogin = (code, cb) => {

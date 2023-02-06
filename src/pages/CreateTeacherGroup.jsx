@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCreateTeacher } from '../asyncAction/option';
 import Form from '../components/Form';
 import UserAlert from '../components/ui/UserAlert';
+import { useCookies } from 'react-cookie';
+
 const CreateTeacherGroup = () => {
   let [groupName, setGroupName] = useState('');
   let [teacherName, setTeaherName] = useState('');
   const { message, type } = useSelector((state) => state.alert);
+  const [cookies] = useCookies();
+
   const dispatch = useDispatch();
   const createTeacher = async (e) => {
     e.preventDefault();
     const userData = {
       groupName,
       teacherName,
+      token: cookies.token,
     };
     await dispatch(fetchCreateTeacher(userData));
   };
