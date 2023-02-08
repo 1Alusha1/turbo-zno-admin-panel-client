@@ -72,3 +72,24 @@ export const fetchGetGroups = (userData) => {
     } catch (err) {}
   };
 };
+
+export const fetchGetAllGroups = (token) => {
+  return async (dispatch) => {
+    try {
+      await axios(`${config.API_URI}/option/get-all-groups`, {
+        method: 'get',
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(({ data }) => {
+          dispatch(getGroupsActionCreator(data.groups));
+          dispatch(setAlert({ type: data.type, message: data.message }));
+        })
+        .catch((err) => {
+          if (err) console.log(err.response.data);
+        });
+    } catch (err) {}
+  };
+};

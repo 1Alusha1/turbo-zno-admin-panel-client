@@ -7,6 +7,7 @@ export const initialState = {
   userInfo: {
     _id: '',
     username: '',
+    roles: [],
   },
   isAuth: false,
 };
