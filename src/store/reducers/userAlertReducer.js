@@ -2,8 +2,8 @@ const SET_ALERT = 'SET_ALERT';
 const CLEAR_ALERT = 'CLEAR_ALERT';
 
 const initialState = {
-  type: '',
-  message: '',
+  type: null,
+  message: null,
 };
 
 export const userAlertReducer = (state = initialState, action) => {

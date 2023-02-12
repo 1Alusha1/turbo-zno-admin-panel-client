@@ -3,8 +3,7 @@ import { clearAlert } from '../../store/reducers/userAlertReducer';
 
 const UserAlert = ({ type, message }) => {
   const dispatch = useDispatch();
-
-  if (message.length) {
+  if (message) {
     setTimeout(() => {
       dispatch(clearAlert());
     }, 3000);

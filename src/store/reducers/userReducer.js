@@ -1,5 +1,5 @@
 const FETCH_LOGIN = 'FETCH_LOGIN';
-const FETCH_LOGIN_ERROR = 'FETCH_LOGIN_ERROR';
+// const FETCH_LOGIN_ERROR = 'FETCH_LOGIN_ERROR';
 const CHECK_AUTH_SUCCESS = 'CHECK_AUTH_SUCCESS';
 const CHECK_AUTH_ERROR = 'CHECK_AUTH_ERROR';
 export const initialState = {
@@ -7,6 +7,7 @@ export const initialState = {
   userInfo: {
     _id: '',
     username: '',
+    roles: [],
   },
   isAuth: false,
 };
@@ -26,15 +27,16 @@ export const userReducer = (state = initialState, action) => {
         userInfo: action.payload.userInfo,
         isAuth: action.payload.isAuth,
       };
+    case CHECK_AUTH_ERROR:
+      return { ...state, isAuth: false };
     default:
       return state;
   }
 };
 
-// export const fetchChekAuthError = (payload) => ({
-//   type: CHECK_AUTH_ERROR,
-//   payload,
-// });
+export const fetchChekAuthError = () => ({
+  type: CHECK_AUTH_ERROR,
+});
 
 export const fetchChekAuthSuccess = (payload) => ({
   type: CHECK_AUTH_SUCCESS,
@@ -46,7 +48,7 @@ export const fetchLoginActionCreator = (payload) => ({
   payload,
 });
 
-export const fetchLoginErrorActionCreator = (payload) => ({
-  type: FETCH_LOGIN_ERROR,
-  payload,
-});
+// export const fetchLoginErrorActionCreator = (payload) => ({
+//   type: FETCH_LOGIN_ERROR,
+//   payload,
+// });

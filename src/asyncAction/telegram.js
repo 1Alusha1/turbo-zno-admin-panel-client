@@ -9,14 +9,21 @@ export const fetchSendMessage = (userData) => {
         method: 'post',
         headers: {
           'content-type': 'application/json',
+          Authorization: `Bearer ${userData.token}`,
         },
-        data: JSON.stringify(userData),
+        data: JSON.stringify({
+          groupName: userData.groupName,
+          message: userData.message,
+        }),
       })
         .then(({ data }) => {
-          dispatch(setAlert(data))
+          dispatch(setAlert(data));
         })
         .catch((err) => {
-          if (err) dispatch(setAlert(err.response.data))
+          if (err.response) {
+            return dispatch(setAlert(err.response.data));
+          }
+          console.log(err);
         });
     } catch (err) {
       if (err) console.log(err);

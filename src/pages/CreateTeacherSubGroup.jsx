@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCreateTeacherSubGroup } from '../asyncAction/option';
 import Form from '../components/Form';
 import UserAlert from '../components/ui/UserAlert';
-import { useCookies } from 'react-cookie';
 
 const CreateTeacherSubGroup = () => {
   let dispatch = useDispatch();
+  const { type, message } = useSelector((state) => state.alert);
   let [groupName, setGroupName] = useState('');
   let [teacherName, setTeaherName] = useState('');
   let [subGroupName, setSubGroupName] = useState('');
-  const { message, type } = useSelector((state) => state.alert);
-  const [cookies] = useCookies();
+
+  const token = document.cookie.split('=')[1];
   const createTeacher = async (e) => {
     e.preventDefault();
     const userData = {
       groupName,
       teacherName,
       subGroupName,
-      token: cookies.token,
+      token,
     };
     await dispatch(fetchCreateTeacherSubGroup(userData));
   };

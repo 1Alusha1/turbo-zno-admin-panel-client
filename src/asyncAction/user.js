@@ -4,21 +4,32 @@ import { setAlert } from '../store/reducers/userAlertReducer.js';
 import {
   fetchChekAuthSuccess,
   fetchLoginActionCreator,
+  fetchChekAuthError,
 } from '../store/reducers/userReducer';
 
 export const fetchLogin = (code, cb) => {
   return async (dispatch) => {
-    await axios
-      .post(`${config.API_URI}/auth/login`, {
-        code: code,
+    try {
+      await axios(`${config.API_URI}/auth/login`, {
+        method: 'post',
+        headers: {
+          'content-type': 'application/json',
+        },
+        data: JSON.stringify({ code }),
       })
-      .then(({ data }) => {
-        dispatch(fetchLoginActionCreator(data));
-        cb(data.token);
-      })
-      .catch((err) => {
-        dispatch(setAlert(err.response.data));
-      });
+        .then(({ data }) => {
+          dispatch(fetchLoginActionCreator(data));
+          cb(data.token);
+        })
+        .catch((err) => {
+          if (err.response) {
+            return dispatch(setAlert(err.response.data));
+          }
+          console.log(err);
+        });
+    } catch (err) {
+      if (err) console.log(err);
+    }
   };
 };
 
@@ -34,10 +45,15 @@ export const fetchChekAuth = (token) => {
           dispatch(fetchChekAuthSuccess(data));
         })
         .catch((err) => {
-          dispatch(setAlert(err.response.data));
+          if (err.response) {
+            dispatch(fetchChekAuthError());
+            return dispatch(setAlert(err.response.data));
+          }
+          console.log(err);
         });
     } catch (err) {
       if (err) console.log(err);
     }
   };
 };
+export const logout = () => {};
