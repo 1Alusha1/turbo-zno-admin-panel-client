@@ -10,6 +10,7 @@ export const optionReducer = (state = initialState, action) => {
       return { ...state, groups: action.payload };
     case GET_GROUP:
       return { ...state, group: action.payload };
+      return {...state, groups: action.payload };
     default:
       return state;
   }
